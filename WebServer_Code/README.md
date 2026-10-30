@@ -1,8 +1,8 @@
-# 🌐 WebServer_Code: ESP32 WiFi OBD2 K-Line Scanner with Web Dashboard
+# 🌐 WebServer_Code: lector OBD2 K-Line con WiFi y panel web para ESP32
 
-This firmware turns an **ESP32** or **ESP8266** into a standalone **WiFi OBD-II diagnostic tool** for K-Line vehicles (ISO 9141-2 and KWP2000 / ISO 14230). The board hosts a mobile-friendly web dashboard, so any phone, tablet or laptop can read **live data**, **trouble codes**, **freeze frame**, **VIN** and more. No app required.
+Este firmware convierte un **ESP32** o **ESP8266** en una herramienta autónoma de diagnóstico **OBD-II por WiFi** para vehículos K-Line (ISO 9141-2 y KWP2000 / ISO 14230). La placa aloja un panel web para móviles desde el que puedes consultar **datos en directo**, **códigos de avería**, **capturas congeladas**, **VIN** y más. No requiere instalar una aplicación.
 
-← [Back to the main README](../README.md)
+← [Volver al README principal](../README.md)
 
 <p align="center">
   <img src="../images/demo.gif" alt="ESP32 OBD2 web dashboard demo" width="340">
@@ -10,7 +10,7 @@ This firmware turns an **ESP32** or **ESP8266** into a standalone **WiFi OBD-II 
 
 ---
 
-## ✨ What You Get
+## ✨ Qué incluye
 
 - 📶 **WiFi Access Point** (`OBD2 Master`) or **Station mode** on your own network, with optional static IP
 - ⚡ **Real-time updates** over WebSocket (about every 100 ms)
@@ -20,7 +20,7 @@ This firmware turns an **ESP32** or **ESP8266** into a standalone **WiFi OBD-II 
 - 🔋 **Battery voltage** measurement with oversampling and smoothing
 - 🔔 Buzzer melodies and LED for connection status
 
-## 🧰 Requirements
+## 🧰 Requisitos
 
 | | |
 |---|---|
@@ -29,9 +29,9 @@ This firmware turns an **ESP32** or **ESP8266** into a standalone **WiFi OBD-II 
 | **Arduino core** | [Espressif ESP32](https://github.com/espressif/arduino-esp32) or [ESP8266](https://github.com/esp8266/Arduino) board package |
 | **Libraries** | [ESPAsyncWebServer](https://github.com/ESP32Async/ESPAsyncWebServer), [AsyncTCP](https://github.com/ESP32Async/AsyncTCP) (ESP32) or [ESPAsyncTCP](https://github.com/ESP32Async/ESPAsyncTCP) (ESP8266), [ArduinoJson](https://arduinojson.org/) v7 |
 
-## 🛠️ Hardware Setup
+## 🛠️ Preparación del hardware
 
-Default pin mapping (edit the `#define`s at the top of `WebServer_Code.ino` to match your board):
+Asignación predeterminada de pines (edita los `#define` al principio de `WebServer_Code.ino` para adaptarlos a la placa):
 
 | Signal | ESP32 / ESP32-S3 | ESP8266 |
 |---|:---:|:---:|
@@ -54,11 +54,11 @@ Default pin mapping (edit the `#define`s at the top of `WebServer_Code.ino` to m
 > - On a classic **ESP32-WROOM**, GPIO 10 / 11 are used by the SPI flash, so move K-Line RX / TX to free pins (for example GPIO 16 / 17).
 > - On **ESP8266**, K-Line uses UART0, which is shared with the USB-serial chip. Debug output is therefore disabled, and you shouldn't use the USB port while the K-Line interface is connected.
 
-**Battery voltage** is read through a resistor divider (defaults **R1 = 47 kΩ**, **R2 = 10 kΩ**) from OBD-II pin 16 to the ADC pin. Adjust `R1`, `R2` and `CALIBRATION_FACTOR` in `WebServer_Code.ino` to match your parts.
+**La **tensión de batería** se mide con un divisor resistivo (valores predeterminados: **R1 = 47 kΩ**, **R2 = 10 kΩ**) entre el pin 16 de OBD-II y el pin ADC. Ajusta `R1`, `R2` y `CALIBRATION_FACTOR` en `WebServer_Code.ino` a tus componentes.
 
-## ⚙️ Installation
+## ⚙️ Instalación
 
-### 1. Flash the firmware
+### 1. Cargar el firmware
 
 1. Open `WebServer_Code/WebServer_Code.ino` in the **Arduino IDE**.
 2. Install the libraries listed above via *Library Manager*.
@@ -66,7 +66,7 @@ Default pin mapping (edit the `#define`s at the top of `WebServer_Code.ino` to m
 4. *(ESP32-S3 / C3 / C6)* Enable **USB CDC On Boot** if you want debug output on the native USB port.
 5. Click **Upload**.
 
-### 2. Upload the web dashboard to SPIFFS
+### 2. Cargar el panel web en SPIFFS
 
 The dashboard lives in [`data/`](data) (pre-gzipped HTML, CSS, JS and fonts). Upload it to the board's SPIFFS partition with one of these:
 
@@ -79,53 +79,53 @@ The dashboard lives in [`data/`](data) (pre-gzipped HTML, CSS, JS and fonts). Up
 > [!IMPORTANT]
 > If SPIFFS is missing or can't be mounted, the firmware halts and the LED blinks continuously. Upload the `data/` folder before first use.
 
-### 3. Pre-built firmware *(optional)*
+### 3. Firmware precompilado *(opcional)*
 
 When pre-compiled binaries are published on the **[Releases](https://github.com/muki01/OBD2_K-line_Reader/releases)** page, flash them with [esptool](https://docs.espressif.com/projects/esptool/) or the [ESP Web Flasher](https://espressif.github.io/esptool-js/).
 
-## 📱 First Connection
+## 📱 Primera conexión
 
-1. Plug the device into the OBD-II port and switch the ignition **on**.
-2. On your phone, join the WiFi network **`OBD2 Master`**. The password is **`12345678`**.
-3. Open **http://192.168.4.1** in a browser.
-4. The two icons in the header show the **WebSocket** and **vehicle** connection state (green means connected).
+1. Conecta el dispositivo al puerto OBD-II y pon el contacto.
+2. En el teléfono, conéctate a la WiFi **`OBD2 Master`**. La contraseña es **`12345678`**.
+3. Abre **http://192.168.4.1** en el navegador.
+4. Los dos iconos de la cabecera muestran el estado de conexión **WebSocket** y del **vehículo** (verde significa conectado).
 
-### Join your own WiFi network (Station mode)
+### Conectarse a tu propia red WiFi (modo estación)
 
-In **Settings → Network Configuration**, enter your SSID and password (and optionally a static IP), then press **Update Network**. The device restarts and joins your network. If it can't connect within a few seconds, it falls back to Access Point mode automatically, so you never get locked out.
+En **Ajustes → Configuración de red**, introduce el SSID y la contraseña (y, opcionalmente, una IP estática) y pulsa **Actualizar red**. El dispositivo se reinicia y se conecta a tu red. Si no logra conectarse en unos segundos, vuelve automáticamente al modo punto de acceso.
 
 > [!TIP]
-> Change `AP_password` in `WEB_SERVER.ino` before using the device regularly.
+> Cambia `AP_password` en `WEB_SERVER.ino` antes de usar el dispositivo habitualmente.
 
-## 🧭 Using the Dashboard
+## 🧭 Uso del panel
 
-| Page | What it does |
+| Página | Función |
 |---|---|
-| **Main Menu** | Battery voltage (green > 12.6 V, yellow 12.0–12.6 V, red < 12.0 V) and navigation |
-| **Live Data** | Real-time values of the PIDs selected in *Settings → Monitor Parameters* |
-| **Error Codes** | Stored DTCs with descriptions, plus **Clear Error Codes** (Mode 04) |
-| **Freeze Frame** | Sensor values the ECU captured when the fault code was stored |
-| **Speed Test** | Press **Start** at standstill; the timer starts above 0 km/h and stops at 100 km/h |
-| **Vehicle Info** | VIN, calibration ID, calibration version and supported PID maps |
-| **Settings** | Theme, protocol, PID picker, WiFi and firmware update |
+| **Menú principal** | Tensión de batería (verde > 12,6 V; amarillo 12,0–12,6 V; rojo < 12,0 V) y navegación |
+| **Datos en directo** | Valores en tiempo real de los PID elegidos en *Ajustes → Parámetros monitorizados* |
+| **Códigos de avería** | DTC almacenados con descripciones y opción **Borrar códigos de avería** (modo 04) |
+| **Captura congelada** | Valores de sensores capturados por la ECU al guardar la avería |
+| **Prueba de velocidad** | Pulsa **Iniciar** con el vehículo parado; el cronómetro comienza al superar 0 km/h y se detiene a 100 km/h |
+| **Información del vehículo** | VIN, ID y versión de calibración, y mapas de PID admitidos |
+| **Ajustes** | Tema, protocolo, selección de PID, WiFi y actualización del firmware |
 
 > [!TIP]
-> K-Line is slow (10.4 kbaud), so every PID adds latency. **Select only the PIDs you need** in *Monitor Parameters* for the fastest Live Data refresh.
+> K-Line es lenta (10,4 kbaudios), por lo que cada PID añade latencia. **Selecciona solo los PID necesarios** en *Parámetros monitorizados* para actualizar más rápido los datos.
 
 The protocol list in Settings also shows CAN options, because the dashboard is shared with the [OBD2 CAN Bus Reader](https://github.com/muki01/OBD2_CAN_Bus_Reader). This firmware uses the K-Line options: **Automatic**, **ISO 9141-2**, **ISO 14230-4 KWP (Slow)** and **ISO 14230-4 KWP (Fast)**.
 
-## 🔄 OTA Updates (ESP32)
+## 🔄 Actualizaciones OTA (ESP32)
 
 Open **Settings → System Maintenance**, choose the **Resource Pack (SPIFFS `.bin`)** and **Core Firmware (`.bin`)** files, then press **Update Firmware**. A progress bar shows the upload; when it finishes the device reboots, and you reconnect to its WiFi.
 
 - Firmware binary: Arduino IDE → **Sketch → Export Compiled Binary**
 - SPIFFS image: generated by your filesystem upload tool, or `pio run --target buildfs` in PlatformIO
 
-## 🔌 API (for your own apps)
+## 🔌 API (para tus aplicaciones)
 
-Everything the dashboard shows is available to your own apps and scripts:
+Tu aplicación o tus scripts también pueden consultar todo lo que muestra el panel:
 
-| Endpoint | Type | Description |
+| Ruta | Tipo | Descripción |
 |---|---|---|
 | `ws://<device-ip>/ws` | WebSocket | Pushes a JSON frame about every 100 ms. Send `page0` … `page6` to choose which data set is streamed, `clear_dtc` to clear codes, `beep` to sound the buzzer |
 | `GET /api/getData` | REST | One-shot JSON snapshot: selected live data, DTCs, voltage and protocol |
@@ -150,16 +150,16 @@ Example live-data frame (`page1`):
 }
 ```
 
-## 🩹 Troubleshooting
+## 🩹 Solución de problemas
 
-| Symptom | What to check |
+| Síntoma | Qué comprobar |
 |---|---|
-| LED blinks forever after boot | SPIFFS not uploaded; see step 2 |
-| `OBD2 Master` WiFi not visible | Wait about 5 s after power-up; the device first tries the saved Station network |
-| Page loads but vehicle icon stays red | Ignition on? Pin 7 populated? Try forcing a protocol in Settings |
-| Live Data updates slowly | Reduce the number of selected PIDs |
-| Wrong battery voltage | Calibrate `R1`, `R2`, `CALIBRATION_FACTOR` |
+| El LED parpadea continuamente tras el arranque | No se ha cargado SPIFFS; consulta el paso 2 |
+| No aparece la WiFi `OBD2 Master` | Espera unos 5 segundos; primero intenta conectarse a la red guardada en modo estación |
+| Se abre la página, pero el icono del vehículo sigue rojo | ¿Está puesto el contacto? ¿Hay contacto en el pin 7? Prueba a seleccionar un protocolo en Ajustes |
+| Los datos se actualizan despacio | Reduce la cantidad de PID seleccionados |
+| La tensión de batería es incorrecta | Calibra `R1`, `R2` y `CALIBRATION_FACTOR` |
 
-## 🎨 Web UI Source
+## 🎨 Código fuente de la interfaz web
 
-The dashboard front-end is maintained separately at **[OBD2 Diagnostic UI](https://github.com/muki01/OBD2-Diagnostic-UI)**. The files in `data/` are its gzipped production build.
+La interfaz del panel se mantiene en un repositorio independiente: **[OBD2 Diagnostic UI](https://github.com/muki01/OBD2-Diagnostic-UI)**. Los archivos de `data/` contienen la versión de producción comprimida con gzip.

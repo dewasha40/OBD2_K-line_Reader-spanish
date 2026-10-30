@@ -1,56 +1,56 @@
-# 🖥️ Basic_Code: OBD2 K-Line Reader for the Serial Monitor
+# 🖥️ Basic_Code: OBD2 K-Line Reader para Monitor Serie
 
-A lightweight **Arduino / ESP32** sketch that talks to your car's ECU over **K-Line** (ISO 9141-2 and KWP2000 / ISO 14230) and prints live sensor data, trouble codes, freeze-frame data and supported PIDs to the **Serial Monitor**.
+Programa ligero para **Arduino / ESP32** que se comunica con la ECU del coche mediante **K-Line** (ISO 9141-2 y KWP2000 / ISO 14230) y muestra datos de sensores, códigos de avería, captura congelada y PID admitidos en el **Monitor Serie**.
 
-Use it to verify your K-Line interface, learn the protocol, or as a starting point for your own firmware. For the WiFi dashboard, see **[WebServer_Code](../WebServer_Code/README.md)**.
+Úsalo para comprobar la interfaz K-Line, aprender el protocolo o como punto de partida para tu propio firmware. Para el panel WiFi, consulta **[WebServer_Code](../WebServer_Code/README.md)**.
 
-← [Back to the main README](../README.md)
+← [Volver al README principal](../README.md)
 
 ---
 
-## 📡 How It Works
+## 📡 Cómo funciona
 
-The sketch uses **two UARTs**:
+El programa utiliza **dos UART**:
 
-| UART | Purpose | Arduino (AVR) | ESP32 |
+| UART | Función | Arduino (AVR) | ESP32 |
 |---|---|---|---|
-| **Main** (`Serial`) | USB link to your computer / Serial Monitor | Hardware `Serial` | Hardware / USB-CDC `Serial` |
-| **K-Line** (`K_Serial`) | Vehicle communication at 10.4 kbaud through the interface circuit | `AltSoftSerial` (software UART) | Hardware `Serial1` |
+| **Principal** (`Serial`) | Conexión USB al ordenador / Monitor Serie | `Serial` de hardware | `Serial` de hardware / USB-CDC |
+| **K-Line** (`K_Serial`) | Comunicación con el coche a 10,4 kbaudios mediante el circuito de interfaz | `AltSoftSerial` (UART por software) | `Serial1` de hardware |
 
-On start-up the firmware wakes the ECU (5-baud or fast init), detects the protocol and then keeps polling. It reconnects automatically if the link drops.
+Al arrancar, el firmware activa la ECU (inicialización lenta a 5 baudios o rápida), detecta el protocolo y comienza a consultar datos. Si se pierde el enlace, intenta reconectarse automáticamente.
 
-## 🛠️ Hardware Setup
+## 🛠️ Preparación del hardware
 
-Build one of the [K-Line interface schematics](../README.md#-interface-schematics) and connect its **RX** and **TX** to:
+Construye uno de los [esquemas de interfaz K-Line](../README.md#-esquemas-de-interfaz) y conecta sus líneas **RX** y **TX** a:
 
-| Board | K-Line RX | K-Line TX | Status LED | Notes |
+| Placa | RX K-Line | TX K-Line | LED de estado | Notas |
 |---|:---:|:---:|:---:|---|
-| Arduino Uno / Nano / Pro Mini | **D8** | **D9** | D13 | Pins are fixed by AltSoftSerial |
-| ESP32-S3 / C3 / C6 | **GPIO 10** | **GPIO 11** | GPIO 6 | Configurable in `Basic_Code.ino` |
+| Arduino Uno / Nano / Pro Mini | **D8** | **D9** | D13 | Pines fijados por AltSoftSerial |
+| ESP32-S3 / C3 / C6 | **GPIO 10** | **GPIO 11** | GPIO 6 | Configurable en `Basic_Code.ino` |
 
 > [!NOTE]
-> On a classic **ESP32-WROOM**, GPIO 10 / 11 are connected to the SPI flash. Change `K_line_RX` / `K_line_TX` to free pins (for example GPIO 16 / 17).
+> En un **ESP32-WROOM** clásico, GPIO 10 / 11 están conectados a la memoria flash SPI. Cambia `K_line_RX` / `K_line_TX` por pines libres (por ejemplo GPIO 16 / 17).
 
-Connect the interface to **OBD-II pin 7** (K-Line), **pin 16** (+12 V) and **pins 4 / 5** (GND). Full pinout is in the [main README](../README.md#obd-ii-connector-pinout-k-line).
+Conecta la interfaz al **pin 7 de OBD-II** (K-Line), al **pin 16** (+12 V) y a los **pines 4 / 5** (GND). Consulta el pinout completo en el [README principal](../README.md#conector-obd-ii-k-line).
 
-## ⚙️ Installation
+## ⚙️ Instalación
 
-### Option 1: Arduino IDE
+### Opción 1: Arduino IDE
 
-1. Install the **[Arduino IDE](https://www.arduino.cc/en/software)** (2.x recommended).
-2. For ESP32, add the **Espressif ESP32** board package via *Boards Manager*.
-3. For Arduino AVR boards, install **AltSoftSerial** via *Library Manager*.
-4. Open `Basic_Code/Basic_Code.ino`. The other `.ino` files in the folder open as tabs automatically.
-5. Select your board and port, then click **Upload**.
-6. Open the **Serial Monitor** at **9600 baud**.
+1. Instala **[Arduino IDE](https://www.arduino.cc/en/software)** (se recomienda la versión 2.x).
+2. Para ESP32, añade el paquete de placas **Espressif ESP32** desde el *Gestor de placas*.
+3. Para placas Arduino AVR, instala **AltSoftSerial** desde el *Gestor de bibliotecas*.
+4. Abre `Basic_Code/Basic_Code.ino`. Los demás archivos `.ino` de la carpeta se abrirán automáticamente como pestañas.
+5. Selecciona la placa y el puerto, y pulsa **Cargar**.
+6. Abre el **Monitor Serie** a **9600 baudios**.
 
-### Option 2: Pre-built firmware
+### Opción 2: Firmware precompilado
 
-When pre-compiled binaries are published on the **[Releases](https://github.com/muki01/OBD2_K-line_Reader/releases)** page, you can flash them directly with [esptool](https://docs.espressif.com/projects/esptool/) or the [ESP Web Flasher](https://espressif.github.io/esptool-js/).
+Cuando se publiquen binarios precompilados en la página de **[versiones](https://github.com/muki01/OBD2_K-line_Reader/releases)**, puedes cargarlos directamente con [esptool](https://docs.espressif.com/projects/esptool/) o [ESP Web Flasher](https://espressif.github.io/esptool-js/).
 
-## 🔧 Configuration
+## 🔧 Configuración
 
-Everything is at the top of `Basic_Code.ino`:
+Los ajustes están al principio de `Basic_Code.ino`:
 
 ```cpp
 String selectedProtocol = "Automatic";   // "Automatic", "ISO9141", "ISO14230_Slow", "ISO14230_Fast"
@@ -60,29 +60,29 @@ int _interByteTimeout  = 60;  // Wait after the last received byte (55 - 5000 ms
 int _readTimeout       = 1000;
 ```
 
-- Leave `selectedProtocol` on **`Automatic`** unless you already know your car's protocol. Forcing it skips the detection step and connects faster.
-- Comment out `#define DEBUG_Serial` to disable all serial output.
+- Deja `selectedProtocol` en **`Automatic`** salvo que conozcas el protocolo del coche. Seleccionarlo manualmente omite la detección y acelera la conexión.
+- Comenta `#define DEBUG_Serial` para desactivar toda la salida serie.
 
-## 📋 What Gets Printed
+## 📋 Datos que muestra
 
-Each polling cycle prints:
+Cada ciclo de consulta muestra:
 
-- **Live data**: vehicle speed, engine RPM, coolant temperature, intake air temperature, throttle position, timing advance, engine load, MAF flow rate
-- **Stored DTCs** (Mode 03) and **pending DTCs** (Mode 07)
-- **Freeze frame** (Mode 02): speed, RPM, coolant temperature and engine load at the time of the fault
-- **Supported PIDs** for live data, freeze frame and vehicle info
+- **Datos en directo**: velocidad, RPM del motor, temperatura del refrigerante, temperatura del aire de admisión, posición del acelerador, avance de encendido, carga del motor y caudal MAF
+- **DTC almacenados** (modo 03) y **DTC pendientes** (modo 07)
+- **Captura congelada** (modo 02): velocidad, RPM, temperatura del refrigerante y carga del motor en el momento de la avería
+- **PID admitidos** para datos en directo, captura congelada e información del vehículo
 
-## 🖼️ Example Output
+## 🖼️ Ejemplo de salida
 
-Sample Serial Monitor output from an **ISO 9141-2** vehicle:
+Ejemplo del Monitor Serie en un vehículo con **ISO 9141-2**:
 
 <img src="https://github.com/user-attachments/assets/0ca043ea-6152-40a5-8b22-c516e84031bb" alt="Serial Monitor output of the OBD2 K-Line Reader showing live data and DTCs from an ISO 9141-2 car" width="320">
 
-## 🩹 Troubleshooting
+## 🩹 Solución de problemas
 
-| Symptom | What to check |
+| Síntoma | Qué comprobar |
 |---|---|
-| No response / init fails | Ignition **on** (engine can be off), pin 7 populated, common ground, interface RX/TX not swapped |
-| Garbage characters | Serial Monitor must be at **9600 baud** |
-| Connects then drops | Increase `_interByteTimeout`, check the 12 V supply of the interface |
-| ESP32 reboots or won't boot | Avoid flash / strapping pins for K-Line RX/TX |
+| Sin respuesta o falla la inicialización | Contacto puesto (motor apagado), pin 7 conectado, masa común y líneas RX/TX de la interfaz sin invertir |
+| Caracteres ilegibles | Configura el Monitor Serie a **9600 baudios** |
+| Se conecta y se desconecta | Aumenta `_interByteTimeout` y comprueba la alimentación de 12 V de la interfaz |
+| El ESP32 se reinicia o no arranca | Evita pines de flash o de configuración de arranque para RX/TX K-Line |
