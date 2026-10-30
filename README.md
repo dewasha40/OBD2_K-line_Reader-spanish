@@ -39,21 +39,21 @@ over <b>ISO 9141-2</b> and <b>KWP2000 (ISO 14230)</b>, desde un panel web en el 
 
 ## 📖 Acerca del proyecto
 
-**OBD2 K-Line Reader** is complete, ready-to-flash firmware that turns a cheap microcontroller into a **DIY OBD-II scan tool** for vehicles that use the **K-Line** diagnostic bus. That covers most European and Asian cars built between roughly **2000 and 2010**, before CAN became mandatory.
+**OBD2 K-Line Reader** es un firmware completo, listo para cargar, que convierte un microcontrolador económico en una herramienta de diagnóstico OBD-II para vehículos con bus **K-Line**. Incluye muchos automóviles europeos y asiáticos fabricados aproximadamente entre **2000 y 2010**, antes de la generalización de CAN.
 
-Plug it into the car's OBD-II port and you get **real-time engine data**, **diagnostic trouble codes** (read and clear), **freeze-frame snapshots**, **VIN and ECU calibration IDs**, a **0–100 km/h acceleration timer** and **battery voltage**, all without an ELM327 adapter, PC software or a paid app.
+Conéctalo al puerto OBD-II para consultar **datos del motor en tiempo real**, **códigos de avería** (leer y borrar), **capturas congeladas**, **VIN e identificadores de calibración de la ECU**, un **cronómetro de aceleración de 0 a 100 km/h** y la **tensión de la batería**. No necesita adaptador ELM327, software de PC ni aplicación de pago.
 
-It comes in two builds:
+El proyecto incluye dos versiones:
 
-| Build | Best for | Output | Boards |
+| Versión | Uso recomendado | Resultado | Placas |
 |---|---|---|---|
 | 🌐 **[`WebServer_Code`](WebServer_Code/README.md)** | A standalone WiFi scan tool | Mobile-friendly web dashboard (WebSocket), OTA updates | ESP32 (incl. S3 / C3 / C6), ESP8266 |
 | 🖥️ **[`Basic_Code`](Basic_Code/README.md)** | Quick tests, learning, porting | Monitor Serie | Arduino Uno / Nano / Pro Mini, ESP32 |
 
-The project also includes **six interface schematics**, from a two-transistor circuit to dedicated automotive transceivers (L9637D, MC33290, Si9241, SN65HVDA195), so you can build the hardware for a few dollars.
+También incluye **seis esquemas de interfaz**, desde un circuito con dos transistores hasta transceptores automotrices específicos (L9637D, MC33290, Si9241, SN65HVDA195), para construir el hardware por pocos euros.
 
 > [!TIP]
-> If this project saves you a trip to the mechanic or helps you learn how cars talk, **please give it a ⭐**. It helps other makers find it.
+> Si este proyecto te ahorra una visita al taller o te ayuda a aprender cómo se comunican los coches, puedes dejar una ⭐ al original para que otros creadores lo encuentren.
 
 ## 🎬 Así funciona
 
@@ -68,13 +68,13 @@ The project also includes **six interface schematics**, from a two-transistor ci
 
 El ESP32 crea su propia red WiFi. Conecta el teléfono, abre **`192.168.4.1`** y accede a las funciones de diagnóstico con un toque:
 
-- 📊 **Datos en directo**: real-time PIDs streamed over WebSocket
-- ⚠️ **Códigos de avería**: read and clear DTCs, with ~1,000 built-in descriptions
-- ❄️ **Captura congelada**: the sensor snapshot taken when the fault was logged
-- 🏁 **0–100 km/h Test**: starts and stops on its own, driven by the vehicle speed PID
-- 🚗 **Información del vehículo**: VIN, calibration ID and supported PID maps
-- ⚙️ **Ajustes**: protocol, PID picker, WiFi and OTA firmware update
-- 🌙 **Dark Mode**, remembered on each device
+- 📊 **Datos en directo**: PID enviados en tiempo real mediante WebSocket.
+- ⚠️ **Códigos de avería**: lee y borra DTC; incluye unas 1000 descripciones.
+- ❄️ **Captura congelada**: valores de sensores guardados al registrarse la avería.
+- 🏁 **Prueba de 0–100 km/h**: comienza y termina automáticamente a partir del PID de velocidad.
+- 🚗 **Información del vehículo**: VIN, ID de calibración y mapas de PID admitidos.
+- ⚙️ **Ajustes**: protocolo, selección de PID, WiFi y actualización OTA del firmware.
+- 🌙 **Modo oscuro**, recordado en cada dispositivo.
 
 No hace falta instalar una aplicación ni conectarse a la nube. Funciona en los navegadores de Android, iOS y ordenador.
 
@@ -95,20 +95,20 @@ No hace falta instalar una aplicación ni conectarse a la nube. Funciona en los 
 - Borrar DTC / reiniciar el testigo MIL (**Mode 04**)
 - DTC pendientes (**Mode 07**)
 - VIN e identificadores de calibración (**Mode 09**)
-- ~1,000 DTC descriptions (P, C, B, U)
+- Unas 1000 descripciones de DTC (P, C, B, U)
 - Supervisión de la tensión de batería
 
 </td>
 <td valign="top" width="33%">
 
 #### 📡 Protocolos
-- **ISO 9141-2** (5-baud init)
-- **ISO 14230-4 KWP2000** slow init
-- **ISO 14230-4 KWP2000** fast init
+- **ISO 9141-2** (inicialización a 5 baudios)
+- **ISO 14230-4 KWP2000**, inicialización lenta
+- **ISO 14230-4 KWP2000**, inicialización rápida
 - **Detección automática del protocolo**
 - Cambio de protocolo durante el funcionamiento
 - Reconexión automática si se pierde el enlace
-- Correct 10.4 kbaud timing, echo cancellation and checksums
+- Temporización correcta a 10,4 kbaudios, cancelación de eco y sumas de comprobación
 
 </td>
 <td valign="top" width="33%">
@@ -116,9 +116,9 @@ No hace falta instalar una aplicación ni conectarse a la nube. Funciona en los 
 #### 🛠️ Plataformas
 - ESP32 / S3 / C3 / C6, ESP8266
 - Arduino Uno, Nano, Pro Mini
-- Portable to STM32 and RP2040
-- WiFi **Access Point or Station** mode
-- **OTA firmware updates** (ESP32)
+- Adaptable a STM32 y RP2040
+- WiFi en modo **punto de acceso o estación**
+- **Actualizaciones OTA del firmware** (ESP32)
 - Ajustes stored in SPIFFS
 - Avisos de estado mediante zumbador y LED
 - Seis opciones de interfaz de hardware
@@ -191,7 +191,7 @@ flowchart LR
 4. **Decodificación.** Responses are validated, the K-Line echo is removed, and the values are converted to engineering units using the SAE J1979 formulas.
 5. **Publicación.** Values go to the Monitor Serie, or to the web dashboard as JSON over a WebSocket about every 100 ms.
 
-### 📡 Supported Protocolos
+### 📡 Protocolos compatibles
 
 | Protocol | Norma | Inicialización | Cabecera | Estado |
 |---|---|---|---|:---:|
