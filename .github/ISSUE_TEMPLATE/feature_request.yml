@@ -1,28 +1,28 @@
-name: 💡 Feature request
-description: Suggest an idea or improvement
+name: 💡 Proponer una función
+description: Sugiere una idea o mejora
 labels: ["enhancement"]
 body:
   - type: textarea
     id: problem
     attributes:
-      label: What problem would this solve?
-      placeholder: I'm always frustrated when ...
+      label: ¿Qué problema resolvería?
+      placeholder: Me resulta frustrante que ...
     validations:
       required: true
   - type: textarea
     id: solution
     attributes:
-      label: Proposed solution
-      description: Describe what you'd like to happen.
+      label: Solución propuesta
+      description: Describe qué te gustaría que ocurriera.
     validations:
       required: true
   - type: textarea
     id: alternatives
     attributes:
-      label: Alternatives considered
+      label: Alternativas consideradas
   - type: checkboxes
     id: contribute
     attributes:
-      label: Contribution
+      label: Colaboración
       options:
-        - label: I'd like to help implement this
+        - label: Me gustaría ayudar a implementarla

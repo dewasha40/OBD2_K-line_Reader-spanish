@@ -1,15 +1,15 @@
-name: 🐛 Bug report
-description: Something isn't working as expected
+name: 🐛 Informar de un error
+description: Algo no funciona como debería
 labels: ["bug"]
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to report a bug! Please fill in as much as you can. Serial logs are the most helpful part.
+        ¡Gracias por dedicar tiempo a informar del error! Rellena todos los datos que puedas. Los registros del puerto serie son lo más útil.
   - type: dropdown
     id: build
     attributes:
-      label: Build
+      label: Compilación
       options:
         - WebServer_Code
         - Basic_Code
@@ -18,55 +18,55 @@ body:
   - type: input
     id: board
     attributes:
-      label: Board
-      placeholder: e.g. ESP32-S3 DevKitC-1, Arduino Nano, NodeMCU ESP8266
+      label: Placa
+      placeholder: p. ej., ESP32-S3 DevKitC-1, Arduino Nano o NodeMCU ESP8266
     validations:
       required: true
   - type: dropdown
     id: interface
     attributes:
-      label: K-Line interface
+      label: Interfaz K-Line
       options:
-        - Transistor-based
-        - Comparator (LM393)
+        - Basada en transistores
+        - Comparador (LM393)
         - L9637D
         - MC33290
         - Si9241
         - SN65HVDA195
-        - Other / custom PCB
+        - Otra / placa personalizada
     validations:
       required: true
   - type: input
     id: vehicle
     attributes:
-      label: Vehicle
-      placeholder: Make, model, year, engine (e.g. Opel Astra H 2006 1.6 Z16XEP)
+      label: Vehículo
+      placeholder: Marca, modelo, año y motor (p. ej., Opel Astra H 2006 1.6 Z16XEP)
   - type: dropdown
     id: protocol
     attributes:
-      label: Selected protocol
+      label: Protocolo seleccionado
       options:
-        - Automatic
+        - Automático
         - ISO 9141-2
-        - ISO 14230 KWP2000 (slow init)
-        - ISO 14230 KWP2000 (fast init)
+        - ISO 14230 KWP2000 (inicialización lenta)
+        - ISO 14230 KWP2000 (inicialización rápida)
   - type: textarea
     id: description
     attributes:
-      label: What happened?
-      description: What did you expect, and what happened instead?
+      label: ¿Qué ha ocurrido?
+      description: ¿Qué esperabas que ocurriera y qué ha ocurrido en su lugar?
     validations:
       required: true
   - type: textarea
     id: steps
     attributes:
-      label: Steps to reproduce
+      label: Pasos para reproducirlo
       placeholder: |
         1. ...
         2. ...
   - type: textarea
     id: logs
     attributes:
-      label: Serial debug output
-      description: Enable `DEBUG_Serial` and paste the log (sent / received bytes). Remove your VIN if you prefer.
+      label: Salida de depuración del puerto serie
+      description: Activa `DEBUG_Serial` y pega el registro (bytes enviados y recibidos). Si lo prefieres, elimina tu VIN.
       render: text

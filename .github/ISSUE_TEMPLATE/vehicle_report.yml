@@ -1,62 +1,62 @@
-name: 🚗 Vehicle compatibility report
-description: Tell us whether OBD2 K-Line Reader works with your car
-title: "[Vehicle] <make> <model> <year>"
+name: 🚗 Informe de compatibilidad del vehículo
+description: Indica si OBD2 K-Line Reader funciona en tu coche
+title: "[Vehículo] <marca> <modelo> <año>"
 labels: ["vehicle-report"]
 body:
   - type: markdown
     attributes:
       value: |
-        Real-world test reports help everyone find out whether their car is supported. Thank you! 🙌
+        Los informes de pruebas reales ayudan a comprobar qué coches son compatibles. ¡Gracias! 🙌
   - type: input
     id: vehicle
     attributes:
-      label: Vehicle
-      placeholder: Make, model, year (e.g. Toyota Corolla 2004)
+      label: Vehículo
+      placeholder: Marca, modelo y año (p. ej., Toyota Corolla 2004)
     validations:
       required: true
   - type: input
     id: engine
     attributes:
-      label: Engine / ECU
-      placeholder: e.g. 1.4 VVT-i petrol, Bosch ME7.9.10
+      label: Motor / ECU
+      placeholder: p. ej., 1.4 VVT-i gasolina, Bosch ME7.9.10
   - type: dropdown
     id: result
     attributes:
-      label: Result
+      label: Resultado
       options:
-        - ✅ Works
-        - ⚠️ Partially works
-        - ❌ Does not connect
+        - ✅ Funciona
+        - ⚠️ Funciona parcialmente
+        - ❌ No conecta
     validations:
       required: true
   - type: dropdown
     id: protocol
     attributes:
-      label: Detected protocol
+      label: Protocolo detectado
       options:
         - ISO 9141-2
-        - ISO 14230 KWP2000 (slow init)
-        - ISO 14230 KWP2000 (fast init)
-        - Not detected
+        - ISO 14230 KWP2000 (inicialización lenta)
+        - ISO 14230 KWP2000 (inicialización rápida)
+        - No detectado
     validations:
       required: true
   - type: checkboxes
     id: features
     attributes:
-      label: Working features
+      label: Funciones que funcionan
       options:
-        - label: Live data
-        - label: Read DTCs
-        - label: Clear DTCs
-        - label: Freeze frame
-        - label: VIN / vehicle info
+        - label: Datos en directo
+        - label: Leer códigos de avería (DTC)
+        - label: Borrar códigos de avería (DTC)
+        - label: Cuadro congelado
+        - label: VIN / información del vehículo
   - type: input
     id: hardware
     attributes:
-      label: Board and interface
-      placeholder: e.g. ESP32-S3 + L9637D
+      label: Placa e interfaz
+      placeholder: p. ej., ESP32-S3 + L9637D
   - type: textarea
     id: notes
     attributes:
-      label: Notes
-      description: Anything else worth knowing (quirks, timing tweaks, logs).
+      label: Notas
+      description: Cualquier otro dato útil (particularidades, ajustes de temporización o registros).

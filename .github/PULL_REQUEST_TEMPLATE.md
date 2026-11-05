@@ -1,25 +1,25 @@
-## Summary
+## Resumen
 
-<!-- What does this PR change, and why? Link related issues with "Fixes #123". -->
+<!-- ¿Qué cambia esta solicitud y por qué? Enlaza las incidencias relacionadas con «Fixes #123». -->
 
-## Type of change
+## Tipo de cambio
 
-- [ ] 🐛 Bug fix
-- [ ] ✨ New feature / PID / board support
-- [ ] 📝 Documentation
-- [ ] ♻️ Refactor / cleanup
+- [ ] 🐛 Corrección de error
+- [ ] ✨ Función nueva / PID / compatibilidad con placas
+- [ ] 📝 Documentación
+- [ ] ♻️ Refactorización / limpieza
 
-## Testing
+## Pruebas
 
-<!-- How did you test this? Communication changes should be tested on a real vehicle. -->
+<!-- ¿Cómo lo has probado? Los cambios de comunicación deben probarse en un vehículo real. -->
 
-- Build(s): <!-- WebServer_Code / Basic_Code -->
-- Board: <!-- e.g. ESP32-S3 -->
-- Vehicle & protocol: <!-- e.g. VW Golf IV 2002, ISO 9141-2 -->
+- Compilación(es): <!-- WebServer_Code / Basic_Code -->
+- Placa: <!-- p. ej., ESP32-S3 -->
+- Vehículo y protocolo: <!-- p. ej., VW Golf IV 2002, ISO 9141-2 -->
 
-## Checklist
+## Lista de comprobación
 
-- [ ] Both sketches compile for the boards they support
-- [ ] I followed the existing code style
-- [ ] I updated the documentation where needed
-- [ ] No credentials, personal data or VINs are included
+- [ ] Ambos sketches compilan para las placas compatibles
+- [ ] He seguido el estilo de código existente
+- [ ] He actualizado la documentación cuando era necesario
+- [ ] No he incluido credenciales, datos personales ni números VIN
