@@ -1,23 +1,23 @@
-# Security Policy
+# Política de Seguridad
 
-## Supported Versions
+## Versiones compatibles
 
-Security fixes are applied to the latest code on the `main` branch and the most recent release.
+Las correcciones de seguridad se aplican al último código en la rama `main` y a la última versión publicada.
 
-## Reporting a Vulnerability
+## Informar sobre una Vulnerabilidad
 
-If you find a security issue, for example in the web server, OTA update endpoint or WiFi configuration handling, **please do not open a public issue**.
+Si encuentras un problema de seguridad —por ejemplo, en el servidor web, el punto de actualización OTA o la gestión de la configuración WiFi—, **no abras un problema público**.
 
-Instead, email **muksin.muksin04@gmail.com** with:
+En su lugar, envía un correo electrónico a **muksin.muksin04@gmail.com** con:
 
-- A description of the issue and its potential impact
-- Steps to reproduce (board, build, configuration)
-- Any suggested fix, if you have one
+- Una descripción del problema y su posible impacto
+- Pasos para reproducirlo (placa, compilación, configuración)
+- Cualquier solución sugerida, si la tiene
 
-You will receive a response as soon as possible, and credit in the release notes if you wish.
+Recibirás una respuesta lo antes posible, y, si lo deseas, se te reconocerá en las notas de la versión.
 
-## Hardening Tips for Users
+## Recomendaciones de seguridad
 
-- Change the default Access Point password (`AP_password` in `WebServer_Code/WEB_SERVER.ino`) before regular use.
-- The web dashboard and OTA endpoint have no authentication. Only connect the device to networks you trust.
-- Unplug the device from the vehicle when not in use.
+- Cambia la contraseña predeterminada del punto de acceso (`AP_password` en `WebServer_Code/WEB_SERVER.ino`) antes de usarlo habitualmente.
+- El panel web y el punto final de actualización OTA no tienen autenticación. Conecta el dispositivo únicamente a redes de confianza.
+- Desconecta el dispositivo del vehículo cuando no lo uses.

@@ -1,54 +1,54 @@
-# Contributing to OBD2 K-Line Reader
+# Contribuyendo al OBD2 K-Line Reader
 
-Thank you for taking the time to contribute! 🎉 Every bug report, vehicle test, fix and idea makes this project better for the whole car-hacking and maker community.
+Gracias por dedicar tiempo para contribuir. 🎉 Cada informe de errores, prueba de vehículo, corrección e idea mejora este proyecto para toda la comunidad de hacking de coches y makers.
 
-By participating, you agree to follow our [Code of Conduct](CODE_OF_CONDUCT.md).
+Al participar, aceptas seguir nuestro [Código de Conducta](CODE_OF_CONDUCT.md).
 
-## Ways to Contribute
+## Formas de Contribuir
 
 | | |
 |---|---|
-| 🚗 **Report a tested vehicle** | Tell us which cars work (or don't). Use the **Vehicle compatibility report** issue template. |
-| 🐛 **Report a bug** | Use the **Bug report** template and include serial logs whenever possible. |
-| 💡 **Suggest a feature** | Use the **Feature request** template. |
-| 🔧 **Submit code** | New PIDs, board ports (STM32, RP2040, …), protocol fixes, performance improvements. |
-| 📝 **Improve docs** | Typos, clearer instructions, wiring photos, translations of guides. |
+| 🚗 **Informa sobre un vehículo probado** | Dinos qué coches funcionan (o no). Usa la plantilla de **Informe de compatibilidad de vehículos**. |
+| 🐛 **Informa un error** | Usa la plantilla de **Informe de error** e incluye registros seriales siempre que sea posible. |
+| 💡 **Sugiere una función** | Usa la plantilla de **Solicitud de función**. |
+| 🔧 **Envía código** | Nuevos PIDs, puertos de placa (STM32, RP2040, …), correcciones de protocolo, mejoras de rendimiento. |
+| 📝 **Mejora la documentación** | Errores tipográficos, instrucciones más claras, fotos de conexión, traducciones de guías. |
 
-## Reporting Bugs
+## Informes de Errores
 
-Before opening an issue, please search [existing issues](https://github.com/muki01/OBD2_K-line_Reader/issues). A good report includes:
+Antes de abrir un problema, por favor busca [problemas existentes](https://github.com/muki01/OBD2_K-line_Reader/issues). Un buen informe incluye:
 
-- Build (`Basic_Code` or `WebServer_Code`) and commit / release version
-- Board (e.g. ESP32-S3 DevKitC-1, Arduino Nano) and Arduino core version
-- Interface circuit used (transistor, LM393, L9637D, …)
-- Vehicle make, model, year and engine
-- Selected and detected protocol
-- **Serial debug output** (enable `DEBUG_Serial`). The raw `➡️ Sending Data` / received bytes are the most useful information.
+- Construcción (`Basic_Code` o `WebServer_Code`) y versión de commit / lanzamiento
+- Placa (p. ej. ESP32-S3 DevKitC-1, Arduino Nano) y versión del núcleo de Arduino
+- Circuito de interfaz utilizado (transistor, LM393, L9637D, …)
+- Marca, modelo, año y motor del vehículo
+- Protocolo seleccionado y detectado
+- **Salida de depuración serial** (habilita `DEBUG_Serial`). Los bytes brutos `➡️ Sending Data` / recibidos son la información más útil.
 
-## Development Workflow
+## Flujo de Desarrollo
 
-1. **Fork** the repository and create a branch from `main`:
+1. **Fork** el repositorio y crea una rama desde `main`:
    ```bash
    git checkout -b feature/my-improvement
    ```
-2. Make your changes, keeping them **focused**: one fix or feature per pull request.
-3. **Test on real hardware** when your change touches communication code, and say in the PR which vehicle / protocol you tested on.
-4. Make sure both sketches still **compile** for the boards they support.
-5. Commit with a clear message, e.g. `Add PID 0x5C oil temperature`.
-6. Push and open a **Pull Request** against `main`, filling in the template.
+2. Haz tus cambios, manteniéndolos **enfocados**: una corrección o función por solicitud de extracción.
+3. **Prueba en hardware real** cuando tu cambio afecte código de comunicación, y di en la PR qué vehículo / protocolo probaste.
+4. Asegúrate de que ambos esquemas aún **compilen** para las placas que soportan.
+5. Haz un commit con un mensaje claro, p. ej. `Add PID 0x5C oil temperature`.
+6. Sube y abre una **Solicitud de Extracción** contra `main`, rellenando la plantilla.
 
-## Coding Guidelines
+## Guías de Codificación
 
-- Follow the existing style of the file you are editing (naming, indentation, comment density).
-- Wrap constant debug strings in `F()` to save RAM on AVR boards.
-- Keep timing-critical K-Line code **non-blocking** where possible and do not change protocol timings without testing.
-- Put board-specific code behind `#ifdef ESP32` / `#elif defined(ESP8266)` / `#elif defined(ARDUINO)` guards.
-- Do not commit binaries, credentials or personal data (e.g. your own VIN) in code or logs.
+- Sigue el estilo existente del archivo que estás editando (nombres, indentación, densidad de comentarios).
+- Envuelve cadenas de depuración constantes en `F()` para ahorrar RAM en placas AVR.
+- Mantén el código crítico de temporización de K-Line **no bloqueante** cuando sea posible y no cambies los tiempos de protocolo sin probar.
+- Coloca código específico de placa detrás de `#ifdef ESP32` / `#elif defined(ESP8266)` / `#elif defined(ARDUINO)`.
+- No comprometas binarios, credenciales o datos personales (p. ej. tu propio VIN) en el código o en los registros.
 
-## Web Dashboard Changes
+## Cambios en el Panel Web
 
-The web UI source lives in **[OBD2 Diagnostic UI](https://github.com/muki01/OBD2-Diagnostic-UI)**. Please open UI pull requests there; `WebServer_Code/data` only holds the gzipped build.
+La fuente de la interfaz web se encuentra en **[OBD2 Diagnostic UI](https://github.com/muki01/OBD2-Diagnostic-UI)**. Por favor, abre solicitudes de extracción de UI allí; `WebServer_Code/data` solo contiene la construcción comprimida.
 
-## License
+## Licencia
 
-By contributing, you agree that your contributions are licensed under the [GNU General Public License v3.0](LICENSE), and that the author may also offer them under a commercial license.
+Al contribuir, aceptas que tus contribuciones se licencian bajo la [Licencia Pública General de GNU v3.0](LICENSE), y que el autor también puede ofrecerlas bajo una licencia comercial.
